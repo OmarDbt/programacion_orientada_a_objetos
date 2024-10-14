@@ -1,47 +1,24 @@
-let posX, posY
-let diametro
-let radio
-let velX, velY;
-let bh;
+let particulas = [];
 
-
-function setup() {
+function setup(){
   createCanvas(windowWidth, windowHeight);
-  bh= color(random(100, 255), random(100), random(255))
-  
-  radio = ceil(random(10, 50));
-  diametro = radio*2;
-  posX = random(radio, width - radio);
-  posY = random(radio, height - radio);
-
-
-  //velX = random(-10, 10);
-  //velY = random(-10, 10);
-  velX = 5
-  velY = 4
 }
 
-function draw() {
-    background(bh);
-    fill(255);
-    noStroke();
-  
+function draw(){
+  background(20, 10);
+  let nuevaParticula = new Particula(mouseX, mouseY);
+  particulas.push(nuevaParticula);
 
-  posX += velX;
-  posY += velY;
-
-  if(posX > width - radio || posX < radio){
-    velX *= -1;
-    bh = color(random(100, 255), random(100), random(255))
-
+  for(let i = 0; i < particulas.length; i++){
+    particulas[i].update();
+    particulas[i].display();
   }
-   
-  if(posY > height - radio || posY < radio){
-    velY *= -1;
-    bh = color(random(100, 255), random(100), random(255))
+  for(let i = 0; i < particulas.length; i++){
+    if(particulas[i].estaViva){
 
+    }else{
+      particulas.splice(i, 1);
+    }
   }
-  
-  circle(posX, posY, diametro)
+
 }
-
